@@ -1,0 +1,146 @@
+{
+    "name": "",
+    "children": [
+      {
+        "name": "李嘉誠家族, 國家電網",
+        "children": [
+          {
+            "name": "",
+            "size": 10,
+            "icon": "img/hkelectric.jpg"
+          }
+        ]
+      },
+      {
+        "name": "嘉道理家族",
+        "children": [
+          {
+            "name": "",
+            "size": 14,
+            "icon": "img/clp.png"
+          },
+          {
+            "name": "山頂纜車",
+            "size": 2,
+            "icon": ""
+          }
+        ]
+      },
+      {
+        "name": "李兆基家族",
+        "children": [
+          {
+            "name": "",
+            "size": 10,
+            "icon": "img/towngas.jpg"
+          }
+        ]
+      },
+      {
+        "name": "李澤楷",
+        "children": [
+          {
+            "name": "",
+            "size": 18,
+            "icon": "img/hkt.png"
+          }
+        ]
+      },
+      {
+        "name": "基金TPG, MBK Partners",
+        "children": [
+          {
+            "name": "",
+            "size": 8,
+            "icon": "img/hkbn.png"
+          }
+        ]
+      },
+      {
+        "name": "基金I Squared Capital",
+        "children": [
+          {
+            "name": "",
+            "size": 8,
+            "icon": "img/hgc.jpg"
+          }
+        ]
+      },
+      {
+        "name": "香港政府",
+        "children": [
+          {
+            "name": "",
+            "size": 25,
+            "icon": "img/mtr_logo.png"
+          }
+        ]
+      },
+      {
+        "name": "新地 郭氏家族",
+        "children": [
+          {
+            "name": "",
+            "size": 12,
+            "icon": "img/kmb.jpg"
+          },
+          {
+            "name": "",
+            "size": 5,
+            "icon": "img/lwb.png"
+          }
+        ]
+      },
+      {
+        "name": "鄭家純旗下新創建",
+        "children": [
+          {
+            "name": "",
+            "size": 12,
+            "icon": "img/citybus_firstbus.gif"
+          }
+        ]
+      },
+      {
+        "name": "冠忠巴士",
+        "children": [
+          {
+            "name": "",
+            "size": 5,
+            "icon": "img/lantau.png"
+          }
+        ]
+      },
+      {
+        "name": "九倉置業",
+        "children": [
+          {
+            "name": "",
+            "size": 5,
+            "icon": "img/starferry.jpg"
+          }
+        ]
+      },
+      {
+        "name": "珠江船務",
+        "children": [
+          {
+            "name": "",
+            "size": 5,
+            "icon": "img/firstferry.png"
+          }
+        ]
+      },
+      {
+        "name": "法國RATP Dev Transdev Asia",
+        "children": [
+          {
+            "name": "",
+            "size": 5,
+            "icon": "img/hktramways.png"
+          }
+        ]
+      }
+    ]
+}
+  

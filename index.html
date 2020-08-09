@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <!-- <script type="text/javascript" src="http://mbostock.github.com/d3/d3.layout.js"></script> -->
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <style type="text/css">
+
+text {
+  font-size: 14px;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+text.parent {
+  font-size: 14px;
+  font-weight: bold;
+  fill: #1f77b4;
+}
+
+circle {
+  fill: #ccc;
+  stroke: #999;
+  pointer-events: all;
+}
+
+circle.parent {
+  fill: #1f77b4;
+  fill-opacity: .1;
+  stroke: steelblue;
+}
+
+circle:hover {
+  stroke: #ff7f0e;
+  stroke-width: 1.5px;
+}
+
+circle.child {
+  pointer-events: all;
+}
+
+    </style>
+  </head>
+  <body>
+    <div id='topbar'>
+      <button type="button" id='switchMap' style="font-size : 20px;" onclick="changeMap()">轉換版圖</button>
+    </div>
+    <div id='map'>
+      <h2></h2>
+    </div>
+    
+    <script type="text/javascript">
+
+var w = 1280,
+    h = 800,
+    r = 720,
+    x = d3.scale.linear().range([0, r]),
+    y = d3.scale.linear().range([0, r]),
+    node,
+    root;
+
+var mapTag = 0;
+
+const selectedMap = ['area.json','travel-agency.json','retailchain.json','bank.json','utilities.json'];
+// const selectedMap = ['travel-agency.json', 'area.json'];
+
+const mapTitle = ['連鎖食肆集團<br>全港版圖','連鎖旅遊集團<br>全港版圖','連鎖零售<br>集團版圖','本地銀行財團<br>版圖','公用事業<br>財團版圖'];
+
+function drawMap(mapTag){
+
+  d3.select("h2").html(mapTitle[mapTag]);
+
+  var pack = d3.layout.pack()
+      .size([r, r])
+      .value(function(d) { return d.size; });
+
+  var vis = d3.select("#map").insert("svg:svg", "h2")
+    .attr("width", w)
+    .attr("height", h)
+    .append("svg:g")
+    .attr("transform", "translate(" + (w - r) / 2 + "," + (h - r) / 2 + ")");
+
+  d3.json(selectedMap[mapTag], function(data) {
+    node = root = data;
+
+    var nodes = pack.nodes(root);
+
+    vis.selectAll("circle")
+        .data(nodes)
+      .enter().append("svg:circle")
+        .attr("class", function(d) { return d.children ? "parent" : "child"; })
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; })
+        .attr("r", function(d) { return d.r; })
+        .on("click", function(d) { return zoom(node == d ? root : d); });
+
+    vis.selectAll("text")
+        .data(nodes)
+      .enter().append("svg:text")
+        .attr("class", function(d) { return d.children ? "parent" : "child"; })
+        .attr("x", function(d) { return d.x; })
+        .attr("y", function(d) { return (d.children ? d.y-d.r:d.y);})
+        .attr("dy", ".35em")
+        .attr("text-anchor", "middle")
+        .style("opacity", function(d) { return d.r > 20 ? 1 : 0; })
+        .text(function(d) { return d.name; })
+        .on("click", function(d) { return zoom(node == d ? root : d); });
+
+    vis.selectAll("image")
+        .data(nodes)
+        .enter().append("svg:image")
+        .attr("x", function(d){return d.x-d.r*0.8/2;})
+        .attr("y", function(d) { return d.y-d.r*0.8/2; })
+        .attr('height', d => d.r  * 0.8)
+        .attr('width', d => d.r  * 0.8)
+        .style("opacity", 0.5)
+        .attr('xlink:href', d => d.icon)
+        .on("click", function(d) { return zoom(node == d ? root : d); });
+
+
+    d3.select(window).on("click", function() { zoom(root); });
+  });
+
+
+  function zoom(d, i) {
+    var k = r / d.r / 2;
+    x.domain([d.x - d.r, d.x + d.r]);
+    y.domain([d.y - d.r, d.y + d.r]);
+
+    var t = vis.transition()
+        .duration(d3.event.altKey ? 7500 : 750);
+
+    t.selectAll("circle")
+        .attr("cx", function(d) { return x(d.x); })
+        .attr("cy", function(d) { return y(d.y); })
+        .attr("r", function(d) { return k * d.r; });
+
+    t.selectAll("text")
+        .attr("x", function(d) { return x(d.x); })
+        .attr("y", function(d) { return y((d.children ? d.y-d.r:d.y)); })
+        .style("opacity", function(d) { return k * d.r > (d.children ? 20:20) ? 1 : 0; });
+
+    t.selectAll("image")
+        .attr("x", function(d) { return x(d.x-d.r*0.8/2); })
+        .attr("y", function(d) { return y(d.y-d.r*0.8/2)+(d.children ? -12:0); })
+        .attr('height', d => k * d.r  * 0.8)
+        .attr('width', d => k* d.r  * 0.8)
+        .style("opacity", function(d) { return k * d.r > (d.children ? 15:20) ? 1 : 0; });
+
+    node = d;
+    d3.event.stopPropagation();
+  }
+
+
+}
+
+
+function changeMap(){
+  mapTag += 1;
+  if (mapTag === selectedMap.length){
+    mapTag = 0;
+  }
+  console.log(mapTag);
+  // d3.select("#map").html(null); 
+  d3.select("#map").selectAll("circle").remove();
+  d3.select("#map").selectAll("text").remove();
+  d3.select("#map").selectAll("image").remove();
+  d3.select("#map").selectAll("svg").remove();
+  drawMap(mapTag);
+}
+
+drawMap(mapTag);
+
+    </script>
+  </body>
+</html>

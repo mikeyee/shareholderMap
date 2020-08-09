@@ -1,0 +1,46 @@
+{
+    "name": "",
+    "children": [
+      {
+        "name": "招商銀行",
+        "children": [
+          {
+            "name": "",
+            "size": 10,
+            "icon": "img/winglung.png"
+          }
+        ]
+      },
+      {
+        "name": "越秀集團",
+        "children": [
+          {
+            "name": "",
+            "size": 14,
+            "icon": "img/chonghingbank.jpg"
+          }
+        ]
+      },
+      {
+        "name": "華僑銀行",
+        "children": [
+          {
+            "name": "南洋商業銀行",
+            "size": 9,
+            "icon": ""
+          }
+        ]
+      },
+      {
+        "name": "廈門國際銀行",
+        "children": [
+          {
+            "name": "",
+            "size": 5,
+            "icon": "img/chiyu.jpg"
+          }
+        ]
+      }
+    ]
+  }
+  

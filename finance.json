@@ -1,0 +1,53 @@
+{
+  "name": "",
+  "children": [
+    {
+      "name": "中國信達",
+      "children": [
+        {
+          "name": "",
+          "size": 41,
+          "icon": "img/ncb.png"
+        },
+      ]
+    },
+    {
+      "name": "越秀企業",
+      "children": [
+        {
+          "name": "",
+          "size": 38,
+          "icon": "img/chonghingbank.jpg"
+        },
+      ]
+    },
+    {
+      "name": "招商銀行",
+      "children": [
+        {
+          "name": "",
+          "size": 33,
+          "icon": "img/招商永隆.png"
+        },
+      ]
+    },
+    {
+      "name": "中國工商銀行",
+      "children": [
+        {
+          "name": "工銀亞洲（前身友聯銀行）",
+          "size": 30
+        },
+      ]
+    },
+    {
+      "name": "中國建設銀行",
+      "children": [
+        {
+          "name": "建銀亞洲（前身美銀亞洲）",
+          "size": 53
+        },
+      ]
+    },
+  ]
+}
